@@ -1,4 +1,4 @@
-FROM openjdk:8
+FROM airdock/oracle-jdk:jdk-1.8
 
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
@@ -9,7 +9,7 @@ ENV JIRA_VERSION  7.3.6
 # directory structure.
 RUN set -x \
     && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends xmlstarlet ca-certificates \
     && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
     && apt-get clean \
     && mkdir -p                "${JIRA_HOME}" \
