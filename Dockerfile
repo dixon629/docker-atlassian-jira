@@ -1,4 +1,4 @@
-FROM guanhui/serverjre:8
+FROM airdock/oracle-jdk:jdk-1.8
 
 # Configuration variables.
 ENV JIRA_HOME     /var/atlassian/jira
@@ -8,8 +8,9 @@ ENV JIRA_VERSION  7.3.6
 # Install Atlassian JIRA and helper tools and setup initial home
 # directory structure.
 RUN set -x \
+    && echo 'deb http://deb.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list \
     && apt-get update --quiet \
-    && apt-get install --quiet --yes --no-install-recommends xmlstarlet \
+    && apt-get install --quiet --yes --no-install-recommends xmlstarlet ca-certificates \
     && apt-get install --quiet --yes --no-install-recommends -t jessie-backports libtcnative-1 \
     && apt-get clean \
     && mkdir -p                "${JIRA_HOME}" \
